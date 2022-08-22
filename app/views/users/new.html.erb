@@ -11,20 +11,53 @@
   <%= link_to "Back to users", users_path %>  
 <%
 =end%>
+<div>
+  <%
+=begin%>
+ <form action="/users" method="post" accept-charset="UTF-8" >
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="user[username]" placeholder="Username">
+    <br>
+    <br>
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="user[email]" placeholder="example@example.com">
+    <br>
+    <br>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="user[password]" placeholder="Password">
+    <br>
+    <input type="submit">
+  </form> 
+<%
+=end%>
 
-<form action="/users" method="post" accept-charset="UTF-8" >
-  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-  <label for="username">Username:</label>
-  <input type="text" id="username" name="user[username]" placeholder="Username">
-  <br>
-  <br>
-  <label for="email">Email:</label>
-  <input type="text" id="email" name="user[email]" placeholder="example@example.com">
-  <br>
-  <br>
-  <label for="password">Password</label>
-  <input type="password" id="password" name="user[password]" placeholder="Password">
-  <br>
-  <input type="submit">
-</form>
+<%
+=begin%>
+ <%= form_with model: @user, scope: 'user' do |form| %>
+  <div>
+    <%= form.label :username, "Username", style: 'display: block' %>
+    <%= form.text_field :username, placeholder: 'Username' %>
+  </div>
+
+  <div>
+    <%= form.label :email, "Email", style: 'display: block' %>
+    <%= form.text_field :email, placeholder: 'email@example.com'%>
+  </div>
+
+   <div>
+    <%= form.label :password, "Password", style: 'display: block' %>
+    <%= form.password_field :password, placeholder: 'password'%>
+  </div>
+
+  <div>
+    <%= form.submit 'Submit' , style: 'margin-top: 10px' %>
+  </div>
+
+<% end %> 
+<%
+=end%>
+
+<%= render "user", user: @user %>
+
 </div>

@@ -9,7 +9,9 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1 or /users/1.json
-  def show; end
+  def show
+    @user = User.find(params[:id])
+  end
 
   # GET /users/new
   # def new
@@ -17,11 +19,13 @@ class UsersController < ApplicationController
   # end
 
   def new
-
+    @user = User.new
   end
 
   # GET /users/1/edit
-  def edit; end
+  def edit
+    @user = User.find(params[:id])
+  end
 
   # POST /users or /users.json
   # def create
@@ -44,7 +48,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to new_user_path
     else
-      render :new, status: :unprocessable_entity
+      render :new
     end
   end
 
